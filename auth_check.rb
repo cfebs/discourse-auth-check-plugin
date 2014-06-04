@@ -4,12 +4,18 @@ module ::AuthCheckPlugin
   end
 
   class AuthCheck
+    TOKEN = "044324350768fcd77362c49b5f241ec6b4002304"
 
     def self.check(params)
         username = params[:u]
         password = params[:p]
+        token = params[:token]
 
-        if username.nil? || password.nil?
+        if token.nil? || username.nil? || password.nil?
+          raise AuthCheckException
+        end
+
+        if token != TOKEN
           raise AuthCheckException
         end
 
